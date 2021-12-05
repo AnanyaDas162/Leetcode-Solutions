@@ -1,0 +1,80 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        ListNode *temp;
+        temp = head;
+        int i = 1;
+        ListNode *start, *newnode, *tail;
+        start = NULL;
+        tail = NULL;
+        newnode = NULL;
+        temp = head;
+        while (temp != NULL)
+        {
+            if (i % 2 != 0)
+            {
+                newnode = new ListNode();
+                newnode -> next = NULL;
+                if (start == NULL)
+                {
+                    start = newnode;
+                    start -> val = temp -> val;
+                    tail = start;
+                }
+                else
+                {
+                    tail -> next = newnode;
+                    tail = newnode;
+                    tail -> val = temp -> val;
+                }
+            }
+            i ++;
+            temp = temp ->next;
+        }
+        ListNode *start2;
+        start2 = NULL;
+        ListNode *newlist;
+        newlist = NULL;
+        ListNode *tail2;
+        tail2 = NULL;
+        temp = head;
+        i = 1;
+          while (temp != NULL)
+        {
+            newlist = new ListNode();
+            newlist -> next = NULL;
+            if (i % 2 == 0)
+            {
+                if (start2 == NULL)
+                {
+                    start2 = newlist;
+                    start2 -> val = temp -> val;
+                    tail2 = start2;
+                }
+                else
+                {
+                    tail2 -> next = newlist;
+                    tail2 = newlist;
+                    tail2 -> val = temp -> val;
+                }
+            }
+            i ++;
+            temp = temp ->next;
+        }
+       if (tail != NULL)
+       {
+            tail -> next = start2;
+       }
+        return start;
+    }
+};
