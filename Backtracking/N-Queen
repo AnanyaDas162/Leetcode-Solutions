@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int x[10];
+     vector <vector<string> > v1;
+    bool place(int k, int i){
+        for (int j = 1; j <= k-1; j ++){
+            if (x[j] == i || abs(x[j] - i) == abs(j-k)){
+                return false;
+            }
+        }
+        return true;
+    }
+    vector <vector<string>> n_Queen(int k, int n){
+        string s;
+        vector <string > v;
+       
+        for (int i = 1; i <= n; i ++){
+            if (place(k, i)){
+                x[k] = i;
+                if (k == n){
+                    s.clear();
+                    for (int i = 1; i <= n; i ++){
+                         for (int j = 1; j<= n; j++){
+                             if (j == x[i]){
+                                 s.push_back('Q'); 
+                             }
+                             else{
+                                 s.push_back('.');
+                             }
+                         }
+                         v.push_back(s);
+                         s.clear();
+                     }
+                     v1.push_back(v);
+                     v.clear();
+                    
+                 }
+                 else{
+                    n_Queen(k+1, n);
+                 }
+            }
+        }
+        return v1;
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector <vector<string>> v1;
+        v1 = n_Queen(1, n);
+        return v1;
+    }
+};
